@@ -7,10 +7,10 @@
         "src/nodeNativeInput.cpp",
         "src/getOne/getOne.cpp",
         "src/getTwo/getTwo.cpp",
-        "src/getThree/getThree.cpp"
+        "src/getThree/getThree.cpp",
+        "src/getScreenDimensions/getScreenDimensions.cpp"
       ],
       "cflags": [
-        "-std=c++14",
         "-Wall",
         "-Wextra",
         "-Wpedantic",
@@ -41,7 +41,7 @@
           {
             "defines": ["Linux"],
             "link_settings": {
-              "libraries": []
+              "libraries": ["-lX11"]
             }
           }
         ]
