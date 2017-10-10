@@ -5,6 +5,7 @@ environment:
     
 install:
   - ps: 'Install-Product node $env:node_version'
+  - ps: 'npm install --global --production windows-build-tools'
   - npm install
 
 test_script:
