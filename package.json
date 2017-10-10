@@ -17,7 +17,6 @@
     "prettier": "^1.7.4"
   },
   "scripts": {
-    "build-module": "node-gyp rebuild",
-    "test-module": "mocha ./test/"
+    "test": "mocha ./test/"
   }
 }
