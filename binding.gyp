@@ -4,9 +4,9 @@
       "target_name": "nodeNativeInput",
       "sources": [
         "src/nodeNativeInput.cpp",
-        "src/getOne/source.cpp",
-        "src/getTwo/source.cpp",
-        "src/getThree/source.cpp"
+        "src/getOne/getOne.cpp",
+        "src/getTwo/getTwo.cpp",
+        "src/getThree/getThree.cpp"
       ],
       "include_dirs": ["<!(node -e \"require('nan')\")"],
       "conditions": [

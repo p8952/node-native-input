@@ -1,4 +1,4 @@
-#include "header.h"
+#include "getThree.h"
 
 NAN_METHOD(getThree)
 {

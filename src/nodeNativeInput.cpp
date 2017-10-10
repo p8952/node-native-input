@@ -1,6 +1,6 @@
-#include "getOne/header.h"
-#include "getTwo/header.h"
-#include "getThree/header.h"
+#include "getOne/getOne.h"
+#include "getTwo/getTwo.h"
+#include "getThree/getThree.h"
 
 using v8::FunctionTemplate;
 using v8::String;

@@ -1,4 +1,4 @@
-#include "header.h"
+#include "getOne.h"
 
 NAN_METHOD(getOne)
 {
