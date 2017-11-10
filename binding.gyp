@@ -14,7 +14,6 @@
       "cflags": [
         "-Wall",
         "-Wextra",
-        "-Wpedantic",
         "-Werror",
         "-Wfatal-errors"
       ],
