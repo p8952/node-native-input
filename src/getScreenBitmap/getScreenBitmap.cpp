@@ -39,7 +39,6 @@ BITMAPINFOHEADER bih;
 
 NAN_METHOD(getScreenBitmap)
 {
-
     char *bitmapData;
     int bitmapSize;
 
@@ -54,20 +53,23 @@ NAN_METHOD(getScreenBitmap)
     Window rootWindow = DefaultRootWindow(mainDisplay);
     XWindowAttributes rootWindowAttributes;
     XGetWindowAttributes(mainDisplay, rootWindow, &rootWindowAttributes);
-    XImage *rootWindowImage = XGetImage(mainDisplay, rootWindow, 0, 0, rootWindowAttributes.width, rootWindowAttributes.height, AllPlanes, ZPixmap);
+    int screenWidth = rootWindowAttributes.width;
+    int screenHeight = rootWindowAttributes.height;
+    XImage *rootWindowImage = XGetImage(mainDisplay, rootWindow, 0, 0, screenWidth, screenHeight, AllPlanes, ZPixmap);
 
-    bitmapSize = 2 + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + rootWindowAttributes.width * rootWindowAttributes.height * 3;
+    bitmapSize = 2 + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + screenWidth * screenHeight * 3;
+    bitmapData = new char[bitmapSize];
 
     unsigned short bfType=0x4d42;
 
     bfh.bfReserved1 = 0;
     bfh.bfReserved2 = 0;
-    bitmapSize = bitmapSize;
+    bfh.bfSize = bitmapSize;
     bfh.bfOffBits = 0x36;
 
     bih.biSize = sizeof(BITMAPINFOHEADER);
-    bih.biWidth = rootWindowAttributes.width;
-    bih.biHeight = rootWindowAttributes.height;
+    bih.biWidth = screenWidth;
+    bih.biHeight = screenHeight;
     bih.biPlanes = 1;
     bih.biBitCount = 24;
     bih.biCompression = 0;
@@ -79,7 +81,6 @@ NAN_METHOD(getScreenBitmap)
 
     char *rootWindowBitmap = new char[bitmapSize];
     char *rootWindowBitmapPtr = rootWindowBitmap;
-    memset(rootWindowBitmap, 0, bitmapSize);
 
     memcpy(rootWindowBitmapPtr, &bfType, sizeof(bfType));
     rootWindowBitmapPtr += sizeof(bfType);
@@ -114,8 +115,7 @@ NAN_METHOD(getScreenBitmap)
         }
     }
 
-    bitmapData = rootWindowBitmap;
-
+    memcpy(bitmapData, rootWindowBitmap, bitmapSize);
     delete[] rootWindowBitmap;
     XDestroyImage(rootWindowImage);
     XDestroyWindow(mainDisplay, rootWindow);
