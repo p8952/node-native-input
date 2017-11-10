@@ -27,15 +27,13 @@ NAN_METHOD(getScreenDimensions)
     Display *mainDisplay = XOpenDisplay(NULL);
     Window rootWindow = DefaultRootWindow(mainDisplay);
     XWindowAttributes rootWindowAttributes;
-
-    XGetWindowAttributes(mainDisplay,
-                         rootWindow,
-                         &rootWindowAttributes);
-
-    XCloseDisplay(mainDisplay);
+    XGetWindowAttributes(mainDisplay, rootWindow, &rootWindowAttributes);
 
     screenWidth = rootWindowAttributes.width;
     screenHeight = rootWindowAttributes.height;
+
+    XDestroyWindow(mainDisplay, rootWindow);
+    XCloseDisplay(mainDisplay);
 #endif
 
     v8::Local<v8::Array> screenDimensions = Nan::New<v8::Array>(2);
