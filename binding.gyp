@@ -8,7 +8,8 @@
         "src/getOne/getOne.cpp",
         "src/getTwo/getTwo.cpp",
         "src/getThree/getThree.cpp",
-        "src/getScreenDimensions/getScreenDimensions.cpp"
+        "src/getScreenDimensions/getScreenDimensions.cpp",
+        "src/getScreenBitmap/getScreenBitmap.cpp"
       ],
       "cflags": [
         "-Wall",
